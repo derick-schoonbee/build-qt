@@ -13,3 +13,5 @@ RUN apt-get install -y qt5-default libqt5sql5-mysql
 RUN apt-get install -y libqt5xmlpatterns5-dev qtscript5-dev libqt5svg5-dev qtdeclarative5-dev
 RUN apt-get install -y curl jq python
 RUN apt-get install -y awscli
+RUN apt-get install -y nfs-common
+RUN apt-get install -y cmake libcurl4-openssl-dev libssl-dev
