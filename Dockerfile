@@ -14,4 +14,4 @@ RUN apt-get install -y libqt5xmlpatterns5-dev qtscript5-dev libqt5svg5-dev qtdec
 RUN apt-get install -y curl jq python
 RUN apt-get install -y awscli
 RUN apt-get install -y nfs-common
-RUN apt-get install -y cmake libcurl4-openssl-dev libssl-dev
+RUN apt-get install -y cmake libcurl4-openssl-dev libssl-dev uuid-dev libpulse-dev
