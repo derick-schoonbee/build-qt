@@ -34,11 +34,11 @@ ARG QTBASEFILE=http://download.qt.io/official_releases/qt/${QTM}/${QT}/submodule
 # Steps, kicking off from the tail end of installerdeps above:
 ADD qt-installer-noninteractive.qs /tmp/qt/script.qs
 ADD ${QTRUNFILE} /tmp/qt/installer.run
+ADD ${QTBASEFILE} /tmp/
 ENV QTM=$QTM
 ENV QTSHA=$QTSHA
 ENV QTCOMPONENTS=$QTCOMPONENTS
 ENV DELETE=$DELETE
-COPY ${QTBASEFILE} /tmp/
 
 # use bash for RUN until the next FROM, so we can use bash strict mode
 # http://redsymbol.net/articles/unofficial-bash-strict-mode/
@@ -50,9 +50,8 @@ RUN set -euo pipefail \
     && cd /opt/qt \
     && rm -rf ${DELETE}
 RUN ls -l /tmp
-RUN tar xJ -f /tmp/qtbase-everywhere-src-${QT}.tar.xz
 RUN ls -l /opt/qt
-RUN mv qtbase-everywhere-src-${QT} /opt/qt/${QT}/qtbase
+RUN mv /tmp/qtbase-everywhere-src-${QT} /opt/qt/${QT}/qtbase
 
 # Build stage 2: copy Qt from the first stage, thus needing fewer packages
 # and leaving less of a mess e.g. the build layer with /tmp/qt/installer.run
