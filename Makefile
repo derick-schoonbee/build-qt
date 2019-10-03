@@ -30,7 +30,6 @@ image: $(QTF) qt-opensource-linux-x64-$(QT).run
 		--build-arg "QT=$(QT)" \
 		--build-arg "QTM=$(QTM)" \
 		--build-arg "QTRUNFILE=$(QTRUNFILE)" \
-		--build-arg "QTBASEFILE=$(QTBASEFILE)" \
 		--build-arg "QTSHA=$(QTSHA)" \
 		--build-arg "QTCOMPONENTS=$(QTCOMPONENTS)" \
 		--build-arg "VCS_REF=$(VCS_REF)" \

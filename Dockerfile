@@ -13,6 +13,7 @@ RUN apt-get update -q && \
         libxrender1 \
         p7zip \
         xvfb \
+        curl \
         xz-utils \
     && apt-get clean
 
@@ -34,7 +35,8 @@ ARG QTBASEFILE=http://download.qt.io/official_releases/qt/${QTM}/${QT}/submodule
 # Steps, kicking off from the tail end of installerdeps above:
 ADD qt-installer-noninteractive.qs /tmp/qt/script.qs
 ADD ${QTRUNFILE} /tmp/qt/installer.run
-ADD ${QTBASEFILE} /tmp/
+RUN curl -sSL ${QTBASEFILE} | tar -xJC /tmp/
+RUN ls -l /tmp
 ENV QTM=$QTM
 ENV QTSHA=$QTSHA
 ENV QTCOMPONENTS=$QTCOMPONENTS
