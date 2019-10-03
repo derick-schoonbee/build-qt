@@ -74,17 +74,20 @@ LABEL org.label-schema.build-date="$BUILD_DATE" \
       org.label-schema.version="$QT" \
       org.label-schema.schema-version="1.0"
 
+RUN echo "deb [trusted=yes] http://repo.mysql.com/apt/ubuntu/ bionic mysql-8.0" >> /etc/apt/sources.list.d/mysql.list
 RUN apt-get update -q && \
     DEBIAN_FRONTEND=noninteractive apt-get install -q -y --no-install-recommends \
         locales \
         build-essential \
         p7zip \
-        gnupg \
+        python-magic ca-certificates python-pip \
+        curl wget unzip \
+        openssl1.0 \
+        libglib2.0-0 \
+        libglu1-mesa \
+        libssl1.0-dev zlib1g-dev libx11-dev libglib2.0-dev libglu1-mesa-dev freeglut3-dev mesa-common-dev libz-dev libcups2 \
+        mysql-client libmysqlclient-dev \
     && apt-get clean
-
-#RUN apt-key adv --keyserver keys.gnupg.net --recv-keys 8C718D3B5072E1F5
-RUN echo "deb [trusted=yes] http://repo.mysql.com/apt/ubuntu/ bionic mysql-8.0" >> /etc/apt/sources.list.d/mysql.list
-RUN apt-get update && apt-get install -y mysql-client libmysqlclient-dev
 
 COPY --from=qtinstalled /opt/qt /opt/qt
 RUN for COMPONENT in `echo ${QTCOMPONENTS} | tr , ' '`; do echo /opt/qt/${QT}/${COMPONENT}/lib >> /etc/ld.so.conf.d/qt-${QT}.conf; done
@@ -95,3 +98,9 @@ RUN cd $QTDIR/qtbase/src/plugins/sqldrivers \
     && qmake -- MYSQL_PREFIX=/usr/local \
     && make sub-mysql \
     && cd mysql && make install
+RUN S3CMD_CURRENT_VERSION=`curl -fs https://api.github.com/repos/s3tools/s3cmd/releases/latest | grep tag_name | sed -E 's/.*"v?([0-9\.]+).*/\1/g'` \
+    && mkdir -p /opt \
+    && wget https://github.com/s3tools/s3cmd/releases/download/v${S3CMD_CURRENT_VERSION}/s3cmd-${S3CMD_CURRENT_VERSION}.zip \
+    && unzip s3cmd-${S3CMD_CURRENT_VERSION}.zip -d /opt/ \
+    && ln -s $(find /opt/ -name s3cmd) /usr/bin/s3cmd \
+    && ls /usr/bin/s3cmd
