@@ -19,7 +19,7 @@ DELETE := Docs Examples Tools MaintenanceTool
 export PATH := /usr/local/opt/coreutils/libexec/gnubin:$(PATH)
 
 # If you need to change anything below, please raise an issue:
-TAG := qt-build:$(UBUNTU)-$(QT)
+TAG := derick/build-qt:$(UBUNTU)-$(QT)
 
 .PHONY: image fetch kick output-new-shasum
 
