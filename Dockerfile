@@ -83,7 +83,7 @@ RUN apt-get update -q && \
         build-essential \
         p7zip \
         python-magic ca-certificates python-pip python-dateutil \
-        curl wget unzip openssl1.0 \
+        curl wget unzip openssl1.0 vim \
         libfontconfig libglib2.0-0 libglu1-mesa \
         libssl1.0-dev zlib1g-dev libx11-dev libglib2.0-dev libglu1-mesa-dev freeglut3-dev mesa-common-dev libz-dev libcups2 \
         mysql-client libmysqlclient-dev \
