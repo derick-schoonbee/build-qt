@@ -1,4 +1,4 @@
-FROM derick/qt-base:focal-5.15.0
+FROM derick/qt-base:qt-5.15.0-focal
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -q -y --no-install-recommends \
         build-essential \
         python-magic python-dateutil \
