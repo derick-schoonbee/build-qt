@@ -1,4 +1,4 @@
-FROM derick/qt-5.15.0-ubuntu:22.04
+FROM derick/qt-base:latest
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -q -y --no-install-recommends \
         build-essential \
         zip unzip p7zip vim \
