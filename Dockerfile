@@ -9,5 +9,5 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -q -y --no-install-recommends
         git \
         libcurl4-openssl-dev \
         qtbase5-dev qtbase5-dev-tools qt5-qmake qt5-qmake-bin \
-        qtdeclarative5-dev libqt5xmlpatterns5-dev \
+        qtdeclarative5-dev libqt5xmlpatterns5-dev qtbase5-private-dev \
     && apt-get clean
