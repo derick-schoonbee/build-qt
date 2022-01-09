@@ -1,4 +1,4 @@
-FROM derick/qt-base:2021-12-05
+FROM derick/qt-base:latest
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -q -y --no-install-recommends \
         build-essential \
         libglu1-mesa \
